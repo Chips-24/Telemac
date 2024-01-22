@@ -19,6 +19,8 @@ builds/
 # Makefiles
 configs/makefile*
 !configs/makefile.template
+!configs/pysource.gfortran.sh
+!configs/pysource.gfortranHPC.sh
 
 # pysource files
 configs/pysource*
