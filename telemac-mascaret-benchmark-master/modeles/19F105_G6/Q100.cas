@@ -1,0 +1,123 @@
+/---------------------------------------------------------------------
+/ ENVIRONNEMENT DE CALCUL
+/---------------------------------------------------------------------
+
+FICHIER DES RESULTATS                 ='G6.res'
+
+PROCESSEURS PARALLELES                =0
+
+SUITE DE CALCUL                       =true
+
+FICHIER DE GEOMETRIE                  ='MODELE_G6.slf'
+
+FICHIER DES CONDITIONS AUX LIMITES    ='G.conlim'
+
+BILAN DE MASSE                        =VRAI
+
+FICHIER DU CALCUL PRECEDENT           ='condInit.ser'
+
+VALIDATION                            =NON
+
+TITRE                                 ='DEFAILLANCE_G6'
+
+PERIODE DE SORTIE LISTING             =300
+
+VARIABLES POUR LES SORTIES GRAPHIQUES =U,V,B,S,H
+
+PERIODE POUR LES SORTIES GRAPHIQUES   =300
+
+
+/---------------------------------------------------------------------
+/ HYDRO
+/---------------------------------------------------------------------
+
+FICHIER DES FRONTIERES LIQUIDES     ='Q100.liq'
+
+TRAITEMENT DU SYSTEME LINEAIRE      =2
+
+EQUATIONS                           ='SAINT-VENANT EF'
+
+LOI DE FROTTEMENT SUR LE FOND       =3
+
+TYPE DES SOURCES                    =1
+
+OPTION POUR LES FRONTIERES LIQUIDES =1
+
+COTES IMPOSEES                      =0
+
+COEFFICIENT DE FROTTEMENT           =10.0
+
+
+/---------------------------------------------------------------------
+/ INFO BANCS DECOUVRANTS
+/---------------------------------------------------------------------
+
+PROFONDEUR LIMITE POUR PROCEDURE DE RESSUYAGE =0.05
+
+TRAITEMENT DES HAUTEURS NEGATIVES             =2
+
+OPTION DE TRAITEMENT DES BANCS DECOUVRANTS    =1
+
+CLIPPING DE H                                 =NON
+
+BANCS DECOUVRANTS                             =VRAI
+
+
+/---------------------------------------------------------------------
+/ INTERNAL
+/---------------------------------------------------------------------
+
+FICHIER DES PARAMETRES ='Q100.cas'
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES GENERAUX
+/---------------------------------------------------------------------
+
+DUREE DU CALCUL =24000
+
+PAS DE TEMPS    =1
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES NUMERIQUES
+/---------------------------------------------------------------------
+
+IMPLICITATION POUR LA HAUTEUR              =1
+
+PRECONDITIONNEMENT                         =2
+
+COMPATIBILITE DU GRADIENT DE SURFACE LIBRE =0.9
+
+FORME DE LA CONVECTION                     =14;5
+
+DISCRETISATIONS EN ESPACE                  =11;11
+
+MASS-LUMPING SUR H                         =1.0
+
+OPTION DE SUPG                             =0;0
+
+PRODUIT MATRICE-VECTEUR                    =1
+
+IMPLICITATION POUR LA VITESSE              =1
+
+CORRECTION DE CONTINUITE                   =vrai
+
+PRECISION DU SOLVEUR                       =0.001
+
+OPTION DU SOLVEUR                          =3
+
+SOLVEUR                                    =1
+
+MAXIMUM D'ITERATIONS POUR LE SOLVEUR       =200
+
+STOCKAGE DES MATRICES                      =3
+
+
+/---------------------------------------------------------------------
+/ TURBULENCE
+/---------------------------------------------------------------------
+
+COEFFICIENT DE DIFFUSION DES VITESSES =0.01
+
+MODELE DE TURBULENCE                  =1

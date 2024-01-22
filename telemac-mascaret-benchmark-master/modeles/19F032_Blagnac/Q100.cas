@@ -1,0 +1,108 @@
+/---------------------------------------------------------------------
+/ TELEMAC2D Version v7p3 18 nov. 2019
+/ Blagnac
+/---------------------------------------------------------------------
+
+
+
+/---------------------------------------------------------------------
+/ ENVIRONNEMENT DE CALCUL
+/---------------------------------------------------------------------
+
+FICHIER DES RESULTATS                 ='res.res'
+
+PROCESSEURS PARALLELES                =4
+
+SUITE DE CALCUL                       =true
+
+FICHIER DE GEOMETRIE                  ='geo.slf'
+
+FICHIER DES CONDITIONS AUX LIMITES    ='cas.conlim'
+
+BILAN DE MASSE                        =true
+
+FICHIER DU CALCUL PRECEDENT           ='condInit.ser'
+
+TITRE                                 ='Blagnac'
+
+PERIODE DE SORTIE LISTING             =300
+
+VARIABLES POUR LES SORTIES GRAPHIQUES =U,V,H,B,S,W,Q
+
+PERIODE POUR LES SORTIES GRAPHIQUES   =300
+
+
+/---------------------------------------------------------------------
+/ HYDRO
+/---------------------------------------------------------------------
+
+DEBITS IMPOSES                      =0;0
+
+FICHIER DES COURBES DE TARAGE       ='Tarage.txt'
+
+FICHIER DES FRONTIERES LIQUIDES     ='cas.liq'
+
+TRAITEMENT DU SYSTEME LINEAIRE      =2
+
+OPTION POUR LES FRONTIERES LIQUIDES =1;1
+
+COTES IMPOSEES                      =0;0
+
+PROFILS DE VITESSE                  =3;1
+
+COURBES DE TARAGE                   =0;1
+
+COEFFICIENT DE FROTTEMENT           =10
+
+LOI DE FROTTEMENT SUR LE FOND       =3
+
+
+/---------------------------------------------------------------------
+/ INFO BANCS DECOUVRANTS
+/---------------------------------------------------------------------
+
+TRAITEMENT DES HAUTEURS NEGATIVES             =2
+
+PROFONDEUR LIMITE POUR PROCEDURE DE RESSUYAGE =0.05
+
+MAXIMUM D'ITERATIONS POUR LES SCHEMAS DE CONVECTION =200
+
+
+/---------------------------------------------------------------------
+/ INTERNAL
+/---------------------------------------------------------------------
+
+FICHIER DES PARAMETRES ='Q100.cas'
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES GENERAUX
+/---------------------------------------------------------------------
+
+DUREE DU CALCUL            =24000
+
+PAS DE TEMPS               =1
+
+NOMBRE DE COURANT SOUHAITE =1
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES NUMERIQUES
+/---------------------------------------------------------------------
+
+OPTION DE SUPG                             =0;0;0;0
+
+COMPATIBILITE DU GRADIENT DE SURFACE LIBRE =0.9
+
+IMPLICITATION POUR LA VITESSE              =1
+
+CORRECTION DE CONTINUITE                   =true
+
+MASS-LUMPING SUR H                         =1
+
+
+/---------------------------------------------------------------------
+/ TURBULENCE
+/---------------------------------------------------------------------
+
+COEFFICIENT DE DIFFUSION DES VITESSES =0.01

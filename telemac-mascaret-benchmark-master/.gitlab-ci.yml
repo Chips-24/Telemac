@@ -1,0 +1,44 @@
+stages:
+  # - 💻 Compute
+  - 📈 PostProcess
+
+variables:
+  HOSTNAME: "gitlab"
+
+# compute:
+  # stage: 💻 Compute
+  # image: nicogodet/telemac:v8p2r1
+  # script:
+    # Reduce simulation time
+    # - find modeles/ -type f -iname *.cas -print0 | xargs -0 sed -i "s/DUREE DU CALCUL.*/DUREE DU CALCUL = 10/g"
+    # - find modeles/ -type f -iname *.cas -print0 | xargs -0 sed -i "s/DURATION.*/DURATION = 10/g"
+    # - chmod +x bench.sh
+    # - ./bench.sh
+  # artifacts:
+    # name: "$PROJECT_DIR_b$CI_COMMIT_REF_NAME-c$CI_COMMIT_SHORT_SHA-j$CI_JOB_ID"
+    # public: true
+    # paths:
+      # - "gitlab_cpu_carac.log"
+      # - "gitlab_results.csv"
+      # - "gitlab_telemac.log"
+
+postprocess:
+  stage: 📈 PostProcess
+  image: python:3.9
+  before_script:
+    - python3 -m pip install matplotlib
+  script:
+    - python3 post.py
+  artifacts:
+    name: "$PROJECT_DIR_b$CI_COMMIT_REF_NAME-c$CI_COMMIT_SHORT_SHA-j$CI_JOB_ID"
+    public: true
+    paths:
+      - "malpasset.png"
+      - "18F111_Tisseo.png"
+      - "19F032_Blagnac.png"
+      - "19F219_Baise.png"
+      - "21F010_Oloron.png"
+      - "19F105_G6.png"
+      - "17F158_Badaillac.png"
+      - "19F046_Lorgues.png"
+      - "20F082_Agly.png"

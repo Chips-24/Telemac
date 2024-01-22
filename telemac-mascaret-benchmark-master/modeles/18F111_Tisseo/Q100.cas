@@ -1,0 +1,147 @@
+/---------------------------------------------------------------------
+/ TELEMAC2D Version v6p3 17 juin 2021
+/ Garonne actuel
+/---------------------------------------------------------------------
+
+
+
+/---------------------------------------------------------------------
+/ CONDITIONS LIMITES
+/---------------------------------------------------------------------
+
+COURBES DE TARAGE =0;1
+
+
+/---------------------------------------------------------------------
+/ ENTREES-SORTIES, FICHIERS
+/---------------------------------------------------------------------
+
+FICHIER DES RESULTATS              ='Actuel_acDechet.res'
+
+FICHIER DES COURBES DE TARAGE      ='Tarage.txt'
+
+FICHIER DES FRONTIERES LIQUIDES    ='bas.liq'
+
+FICHIER DES PARAMETRES             ='Q100.cas'
+
+FICHIER DE GEOMETRIE               ='geo.slf'
+
+FICHIER DES CONDITIONS AUX LIMITES ='bas.conlim'
+
+FICHIER DU CALCUL PRECEDENT        ='Init_Actuel_acDechet.slf'
+
+
+/---------------------------------------------------------------------
+/ ENTREES-SORTIES, GENERALITES
+/---------------------------------------------------------------------
+
+SUITE DE CALCUL =true
+
+VALIDATION      =NON
+
+TITRE           ='Garonne actuel'
+
+
+/---------------------------------------------------------------------
+/ ENTREES-SORTIES, GRAPHIQUES ET LISTING
+/---------------------------------------------------------------------
+
+BILAN DE MASSE                        =true
+
+PERIODE DE SORTIE LISTING             =1200
+
+VARIABLES POUR LES SORTIES GRAPHIQUES =U,V,S,H,B,MAXZ,MAXV
+
+PERIODE POUR LES SORTIES GRAPHIQUES   =1200
+
+
+/---------------------------------------------------------------------
+/ EQUATIONS
+/---------------------------------------------------------------------
+
+COEFFICIENT DE DIFFUSION DES VITESSES =0.01
+
+MODELE DE TURBULENCE                  =1
+
+COEFFICIENT DE FROTTEMENT             =15.0
+
+LOI DE FROTTEMENT SUR LE FOND         =3
+
+
+/---------------------------------------------------------------------
+/ EQUATIONS, CONDITIONS LIMITES
+/---------------------------------------------------------------------
+
+DEBITS IMPOSES                      =0;0
+
+OPTION POUR LES FRONTIERES LIQUIDES =1;1
+
+COTES IMPOSEES                      =0;0
+
+PROFILS DE VITESSE                  =3;1
+
+
+/---------------------------------------------------------------------
+/ EQUATIONS, SOURCES
+/---------------------------------------------------------------------
+
+TYPE DES SOURCES =1
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES NUMERIQUES
+/---------------------------------------------------------------------
+
+DUREE DU CALCUL                            =24000
+
+PRECONDITIONNEMENT                         =2
+
+TRAITEMENT DU SYSTEME LINEAIRE             =2
+
+EQUATIONS                                  ='SAINT-VENANT EF'
+
+COMPATIBILITE DU GRADIENT DE SURFACE LIBRE =0.9
+
+FORME DE LA CONVECTION                     =1;5
+
+PROCESSEURS PARALLELES                     =2
+
+DISCRETISATIONS EN ESPACE                  =11;11
+
+OPTION DE SUPG                             =0;0
+
+PRODUIT MATRICE-VECTEUR                    =1
+
+PAS DE TEMPS                               =1.0
+
+CORRECTION DE CONTINUITE                   =true
+
+OPTION DE TRAITEMENT DES BANCS DECOUVRANTS =1
+
+STOCKAGE DES MATRICES                      =3
+
+BANCS DECOUVRANTS                          =true
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES NUMERIQUES, SOLVEUR
+/---------------------------------------------------------------------
+
+MAXIMUM D'ITERATIONS POUR LE SOLVEUR =200
+
+PRECISION DU SOLVEUR                 =0.0001
+
+OPTION DU SOLVEUR                    =3
+
+SOLVEUR                              =1
+
+
+/---------------------------------------------------------------------
+/ PARAMETRES NUMERIQUES, VITESSE-CELERITE-HAUTEUR
+/---------------------------------------------------------------------
+
+IMPLICITATION POUR LA HAUTEUR =1
+
+IMPLICITATION POUR LA VITESSE =1
+
+MASS-LUMPING SUR H            =1.0
