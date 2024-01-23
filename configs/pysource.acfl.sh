@@ -16,3 +16,5 @@ export PYTHONPATH=$HOMETEL/scripts/python3:$PYTHONPATH
 export PYTHONPATH=$HOMETEL/builds/$USETELCFG/wrap_api/lib:$PYTHONPATH
 # Force Python to flush its output
 export PYTHONUNBUFFERED='true'
+# Path to dependencies directory
+export DEPSDIR=$HOMETEL/deps/acfl

@@ -12,9 +12,11 @@ fi
 
 set -x
 
+mkdir -p $DEPSDIR
+
 cd $METIS_SOURCE
 
-make config $@
+make config cc=armclang prefix=$DEPSDIR
 make
 make install
 

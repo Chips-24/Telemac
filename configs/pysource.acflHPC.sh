@@ -16,5 +16,14 @@ export PYTHONPATH=$HOMETEL/scripts/python3:$PYTHONPATH
 export PYTHONPATH=$HOMETEL/builds/$USETELCFG/wrap_api/lib:$PYTHONPATH
 # Force Python to flush its output
 export PYTHONUNBUFFERED='true'
+# Path to dependencies directory
+export DEPSDIR=$HOMETEL/deps/acfl
 # Path to the METIS installation directory
-export METISHOME=$HOMETEL/deps/acfl
+export METISHOME=$DEPSDIR
+export LD_LIBRARY_PATH=$METISHOME/lib:$LD_LIBRARY_PATH
+# Path to hdf5 installation directory
+export HDF5HOME=$DEPSDIR
+export LD_LIBRARY_PATH=$HDF5HOME/lib:$LD_LIBRARY_PATH
+# Path to MED installation directory
+export MEDHOME=$DEPSDIR
+export LD_LIBRARY_PATH=$MEDHOME/lib:$LD_LIBRARY_PATH
