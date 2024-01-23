@@ -1,5 +1,5 @@
 !                   *********************************
-                    CHARACTER(LEN=PATH_LEN) FUNCTION CARLU
+                    CHARACTER(LEN=250) FUNCTION CARLU
 !                   *********************************
 !
      &( LCAR   , ICOL  , LIGNE  , EXTREM , MOTCLE , SIZE , MOTIGN ,
