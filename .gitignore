@@ -23,10 +23,13 @@ configs/makefile*
 # pysource files
 configs/pysource*
 !configs/pysource.template.*
+!configs/pysource.gfortran.sh
+!configs/pysource.gfortranHPC.sh
 
 # Validation directories and generated images
 examples/*/*/vnv_*/
 examples/*/*/img/*.png
+telemac-mascaret-benchmark*/
 
 # LaTeX generated files 
 documentation/*/*/*.aux
