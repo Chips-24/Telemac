@@ -26,6 +26,7 @@ configs/pysource*
 !configs/pysource.gfortran.sh
 !configs/pysource.gfortranHPC.sh
 !configs/pysource.acfl.sh
+!configs/pysource.acflHPC.sh
 
 # Validation directories and generated images
 examples/*/*/vnv_*/
