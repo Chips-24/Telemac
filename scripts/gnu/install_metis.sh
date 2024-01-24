@@ -14,7 +14,7 @@ set -x
 
 cd $METIS_SOURCE
 
-make config cc=armclang prefix=$DEPSDIR
+make config cc=gcc prefix=$DEPSDIR
 make
 make install
 

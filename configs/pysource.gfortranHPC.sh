@@ -8,7 +8,7 @@
 ###export HOMETEL=$HOME/Telemac
 export HOMETEL=$(dirname $(cd $(dirname $BASH_SOURCE) && pwd))
 # Configuration file
-export SYSTELCFG=$HOMETEL/configs/systel.cfg
+export SYSTELCFG=$HOMETEL/configs/systel.gnu.cfg
 # Name of the configuration to use
 export USETELCFG=gfortranHPC
 # Path to this file
@@ -24,14 +24,15 @@ export PYTHONPATH=$HOMETEL/scripts/python3:$PYTHONPATH
 export PYTHONPATH=$HOMETEL/builds/$USETELCFG/wrap_api/lib:$PYTHONPATH
 # Force Python to flush its output
 export PYTHONUNBUFFERED='true'
+export DEPSDIR=$HOMETEL/deps/gnu
 ## For METIS
-export METISHOME=$HOMETEL/dep
+export METISHOME=$DEPSDIR
 export LD_LIBRARY_PATH=$METISHOME/lib:$LD_LIBRARY_PATH
 ### HDF5 -------------------------------------------------------------
-export HDF5HOME=$HOMETEL/dep2
+export HDF5HOME=$DEPSDIR
 export LD_LIBRARY_PATH=$HDF5HOME/lib:$LD_LIBRARY_PATH
 ### MED -------------------------------------------------------------
-export MEDHOME=$HOMETEL/dep3
+export MEDHOME=$DEPSDIR
 export LD_LIBRARY_PATH=$MEDHOME/lib:$LD_LIBRARY_PATH
 ###export PATH=$MEDHOME/bin:$PATH
 

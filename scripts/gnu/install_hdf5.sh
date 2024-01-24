@@ -14,7 +14,7 @@ set -x
 
 cd $HDF5_SOURCE
 
-CC=armclang CFLAGS="-fPIC -Wno-error=implicit-function-declaration -Wno-error=incompatible-function-pointer-types" LDFLAGS="-fPIC" CXX=armclang++ FC=armflang ./configure --prefix=$DEPSDIR
+CC=gcc CFLAGS="-fPIC" LDFLAGS="-fPIC" CXX=g++ FC=gfortran ./configure --prefix=$DEPSDIR
 make
 make install
 
