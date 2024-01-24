@@ -14,7 +14,7 @@ set -x
 
 cd $MED_SOURCE
 
-CC=armclang CFLAGS="-O2 -fPIC" CXX=armclang++ CXXFLAGS="-O2 -fPIC" FC=armflang FFLAGS="-O2 -fPIC" ./configure --prefix=$DEPSDIR --with-hdf5=$HDF5HOME --disable-python
+CC=armclang CFLAGS="-O2 -fPIC" CXX=armclang++ CXXFLAGS="-O2 -fPIC" FC=armflang FFLAGS="-O2 -fPIC" ./configure --prefix=$MEDHOME --with-hdf5=$HDF5HOME --disable-python
 make
 make install
 

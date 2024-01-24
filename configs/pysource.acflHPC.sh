@@ -27,3 +27,6 @@ export LD_LIBRARY_PATH=$HDF5HOME/lib:$LD_LIBRARY_PATH
 # Path to MED installation directory
 export MEDHOME=$DEPSDIR
 export LD_LIBRARY_PATH=$MEDHOME/lib:$LD_LIBRARY_PATH
+# Path to AED2 installation directory
+export AED2HOME=$DEPSDIR
+export LD_LIBRARY_PATH=$AED2HOME/lib:$LD_LIBRARY_PATH

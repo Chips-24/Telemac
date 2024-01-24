@@ -14,7 +14,7 @@ set -x
 
 cd $MED_SOURCE
 
-CC=gcc CFLAGS=-O2 CXX=g++ CXXFLAGS=-O2 FC=gfortran FFLAGS=-O2 PYTHON_VERSION=3 ./configure --prefix=$DEPSDIR --with-hdf5=$HDF5HOME --disable-python
+CC=gcc CFLAGS=-O2 CXX=g++ CXXFLAGS=-O2 FC=gfortran FFLAGS=-O2 PYTHON_VERSION=3 ./configure --prefix=$MEDHOME --with-hdf5=$HDF5HOME --disable-python
 make
 make install
 

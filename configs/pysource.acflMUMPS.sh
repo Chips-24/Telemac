@@ -33,4 +33,7 @@ export LD_LIBRARY_PATH=$SCALAPACKHOME/lib:$LD_LIBRARY_PATH
 # Path to the MUMPS installation directory
 export MUMPSHOME=$DEPSDIR
 export LD_LIBRARY_PATH=$MUMPSHOME/lib:$LD_LIBRARY_PATH
+# Path to AED2 installation directory
+export AED2HOME=$DEPSDIR
+export LD_LIBRARY_PATH=$AED2HOME/lib:$LD_LIBRARY_PATH
 
