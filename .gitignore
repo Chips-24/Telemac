@@ -3,6 +3,7 @@ builds/
 
 # Python byte-code files
 *.pyc
+__pycache__/
 
 # Compiled object files and libraries
 *.o
