@@ -24,13 +24,8 @@ configs/makefile*
 # pysource files
 configs/pysource*
 !configs/pysource.template.*
-!configs/pysource.gfortran.sh
-!configs/pysource.gfortranHPC.sh
-!configs/pysource.gfortranSLURM.sh
-!configs/pysource.acfl.sh
-!configs/pysource.acflHPC.sh
-!configs/pysource.acflMUMPS.sh
-!configs/pysource.acflSLURM.sh
+!configs/pysource.gfortran*.sh
+!configs/pysource.acfl*.sh
 
 # Validation directories and generated images
 examples/*/*/vnv_*/
