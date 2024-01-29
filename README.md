@@ -1,5 +1,21 @@
 ![openTELEMAC][telemac-banner]
 
+Preface
+=======
+
+This is a modified version of the open TELEMAC-MASCARET source code, which we
+worked on for the 2024 edition of Teratec's HPC Hackaton. Some of the elements
+of the original repositery such as examples and notebooks have been ommited to
+fit into Github's repository size limit. In particular, if you want to run the
+examples, you should manualy download the example folder from the [open TELEMAC
+official repository](https://gitlab.pam-retd.fr/otm/telemac-mascaret) or a
+[tarball](https://gitlab.pam-retd.fr/otm/telemac-mascaret/-/archive/v8p5r0/telemac-mascaret-v8p5r0.tar.gz)
+corresponding to the version we used (v8p5r0).
+
+Instructions to compile and run this code on the same environment we were
+provided with during the Hackathon can be found in
+[README_TEAM_08.md](./README_TEAM_08.md).
+
 Introduction
 ============
 
