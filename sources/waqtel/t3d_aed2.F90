@@ -126,6 +126,75 @@
 
       CONTAINS
 
+!                       **************************
+                        CHARACTER FUNCTION TOLOWER &
+!                       **************************
+!
+      (C)
+!
+!***********************************************************************
+! WAQTEL      V7P3
+!***********************************************************************
+!
+!brief
+!
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!
+!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+!
+      CHARACTER, INTENT(IN) :: C
+!
+!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+!
+      INTEGER IC
+!
+!-----------------------------------------------------------------------
+!
+!BEGIN
+!----------------------------------------------------------------------------
+      IC = ICHAR(C)
+      IF (IC.GE.65 .AND. IC.LT.90) IC = (IC+32)
+      TOLOWER = CHAR(IC)
+      END FUNCTION TOLOWER
+
+
+!                       *****************************************
+                        FUNCTION SAME_STR_ICASE(A, B) RESULT(RES)
+!                       *****************************************
+!
+!
+!***********************************************************************
+! WAQTEL      V7P3
+!***********************************************************************
+!
+!brief  Tests if A and B are the same string
+!
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!
+!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+!
+      CHARACTER(LEN=*), INTENT(IN) :: A,B
+!
+!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+!
+      INTEGER LEN, I
+      LOGICAL RES
+!
+!-----------------------------------------------------------------------
+!
+!BEGIN
+      RES = .FALSE.
+      LEN = LEN_TRIM(A)
+      IF ( LEN.NE.LEN_TRIM(B) ) RETURN
+      DO I=1, LEN
+        IF (TOLOWER(A(I:I)).NE.TOLOWER(B(I:I)) ) RETURN
+      ENDDO
+      RES = .TRUE.
+
+      END FUNCTION SAME_STR_ICASE
+
 !                       ***************************
                         SUBROUTINE INIT_AED2_MODELS &
 !                       ***************************
@@ -421,6 +490,17 @@
       TYPE(AED2_VARIABLE_T),POINTER :: TV
 !
 !-----------------------------------------------------------------------
+!     Set initial from file
+      INTEGER UNIT, NCCOLS, CCOL
+      CHARACTER(LEN=32),POINTER,DIMENSION(:) :: CSVNAMES
+      AED_REAL,DIMENSION(:),ALLOCATABLE :: VALUES
+      INTEGER :: IDX_COL = 0, NUMV = 0, NUMD = 0, T
+      INTEGER,DIMENSION(:),ALLOCATABLE :: VARS, VMAP
+      INTEGER,DIMENSION(:),ALLOCATABLE :: DVAR, DMAP
+      LOGICAL,DIMENSION(:),ALLOCATABLE :: VSHEET, DSHEET
+      LOGICAL MEH
+!
+!-----------------------------------------------------------------------
 !
 !BEGIN
       NWQ = N_VARS
@@ -491,123 +571,8 @@
         ENDIF
       ENDDO
 
-      IF ( INIT_VALUES_FILE.NE.'' ) CALL SET_INITIAL_FROM_FILE
-
-!      CALL FV_INITIALIZE()
-
-
-      ALLOCATE(FLUX(N_VARS, NCELLS),STAT=RC)
-      IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX)'
-!#if !_NO_ODE_
-!      ALLOCATE(FLUX2(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX2)'
-!      ALLOCATE(FLUX3(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX3)'
-!      ALLOCATE(FLUX4(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX4)'
-!      ALLOCATE(CC1(N_VARS, NCELLS),STAT=RC)   ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (CC1)'
-!#endif
-!
-!-------------------------------------------------------------------------------
-      CONTAINS
-
-!                       **************************
-                        CHARACTER FUNCTION TOLOWER &
-!                       **************************
-!
-      (C)
-!
-!***********************************************************************
-! WAQTEL      V7P3
-!***********************************************************************
-!
-!brief
-!
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-      CHARACTER, INTENT(IN) :: C
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-      INTEGER IC
-!
-!-----------------------------------------------------------------------
-!
-!BEGIN
-!----------------------------------------------------------------------------
-      IC = ICHAR(C)
-      IF (IC.GE.65 .AND. IC.LT.90) IC = (IC+32)
-      TOLOWER = CHAR(IC)
-      END FUNCTION TOLOWER
-
-!                       *****************************************
-                        FUNCTION SAME_STR_ICASE(A, B) RESULT(RES)
-!                       *****************************************
-!
-!
-!***********************************************************************
-! WAQTEL      V7P3
-!***********************************************************************
-!
-!brief  Tests if A and B are the same string
-!
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-      CHARACTER(LEN=*), INTENT(IN) :: A,B
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-      INTEGER LEN, I
-      LOGICAL RES
-!
-!-----------------------------------------------------------------------
-!
-!BEGIN
-      RES = .FALSE.
-      LEN = LEN_TRIM(A)
-      IF ( LEN.NE.LEN_TRIM(B) ) RETURN
-      DO I=1, LEN
-        IF (TOLOWER(A(I:I)).NE.TOLOWER(B(I:I)) ) RETURN
-      ENDDO
-      RES = .TRUE.
-
-      END FUNCTION SAME_STR_ICASE
-
-!                     ********************************
-                      SUBROUTINE SET_INITIAL_FROM_FILE
-!                     ********************************
-!
-!
-!***********************************************************************
-! WAQTEL      V7P3
-!***********************************************************************
-!
-!brief  Set initial values of AED2 variables from files
-!
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-!+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-!
-      INTEGER UNIT, NCCOLS, CCOL
-      CHARACTER(LEN=32),POINTER,DIMENSION(:) :: CSVNAMES
-      AED_REAL,DIMENSION(:),ALLOCATABLE :: VALUES
-      INTEGER :: IDX_COL = 0, NUMV = 0, NUMD = 0, T
-      INTEGER,DIMENSION(:),ALLOCATABLE :: VARS, VMAP
-      INTEGER,DIMENSION(:),ALLOCATABLE :: DVAR, DMAP
-      LOGICAL,DIMENSION(:),ALLOCATABLE :: VSHEET, DSHEET
-      LOGICAL MEH
-!
-!-----------------------------------------------------------------------
-!
-!BEGIN
-!----------------------------------------------------------------------------
+      ! IF ( INIT_VALUES_FILE.NE.'' ) CALL SET_INITIAL_FROM_FILE
+      IF ( INIT_VALUES_FILE.NE.'' ) THEN
       UNIT = AED_CSV_READ_HEADER(INIT_VALUES_FILE, CSVNAMES, NCCOLS)
       WRITE(LU,*)'BENTHIC VARS INITIALISED FROM FILE : ', CSVNAMES
       IF (UNIT.LE.0) RETURN !# NO FILE FOUND
@@ -682,11 +647,22 @@
       IF (ALLOCATED(VMAP))      DEALLOCATE(VMAP)
       IF (ALLOCATED(DVAR))      DEALLOCATE(DVAR)
       IF (ALLOCATED(DMAP))      DEALLOCATE(DMAP)
+
+      ENDIF
+
+!      CALL FV_INITIALIZE()
+
+
+      ALLOCATE(FLUX(N_VARS, NCELLS),STAT=RC)
+      IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX)'
+!#if !_NO_ODE_
+!      ALLOCATE(FLUX2(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX2)'
+!      ALLOCATE(FLUX3(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX3)'
+!      ALLOCATE(FLUX4(N_VARS, NCELLS),STAT=RC) ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (FLUX4)'
+!      ALLOCATE(CC1(N_VARS, NCELLS),STAT=RC)   ; IF (RC.NE.0) STOP 'ALLOCATE_MEMORY(): ERROR ALLOCATING (CC1)'
+!#endif
 !
-!-----------------------------------------------------------------------
-!
-      RETURN
-      END SUBROUTINE SET_INITIAL_FROM_FILE
+!-------------------------------------------------------------------------------
 
       END SUBROUTINE INIT_VAR_AED2_MODELS
 
